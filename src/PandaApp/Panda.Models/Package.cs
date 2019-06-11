@@ -12,7 +12,7 @@ namespace Panda.Models
         [Range(5, 20)]
         public string Description { get; set; }
 
-        public double Weight { get; set; }
+        public decimal Weight { get; set; }
 
         public string ShippingAddress { get; set; }
 
@@ -22,6 +22,6 @@ namespace Panda.Models
 
         [Required]
         public string RecipientId { get; set; } = Guid.NewGuid().ToString();
-        public User Recipient { get; set; }
+        public User Recipient { get; set; } //virtual  ???
     }
 }

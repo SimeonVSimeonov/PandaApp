@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Panda.Models.Enums
+﻿namespace Panda.Models.Enums
 {
     public enum Status
     {
-        Pending,
-        Delivered
+        Pending = 1,
+        Delivered = 2,
     }
 }

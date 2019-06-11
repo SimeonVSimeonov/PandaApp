@@ -36,7 +36,7 @@ namespace Panda.Data.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<double>("Weight");
+                    b.Property<decimal>("Weight");
 
                     b.HasKey("Id");
 

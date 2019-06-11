@@ -25,8 +25,8 @@ namespace Panda.Models
         [Required]
         public string Password { get; set; }
 
-        public ICollection<Package> Packages { get; set; }
+        public ICollection<Package> Packages { get; set; } //virtual  ???
 
-        public ICollection<Receipt> Receipts { get; set; }
+        public ICollection<Receipt> Receipts { get; set; } //virtual  ???
     }
 }

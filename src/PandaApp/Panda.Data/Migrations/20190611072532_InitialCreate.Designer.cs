@@ -10,7 +10,7 @@ using Panda.Data;
 namespace Panda.Data.Migrations
 {
     [DbContext(typeof(PandaAppDBContext))]
-    [Migration("20190608214340_InitialCreate")]
+    [Migration("20190611072532_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace Panda.Data.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<double>("Weight");
+                    b.Property<decimal>("Weight");
 
                     b.HasKey("Id");
 

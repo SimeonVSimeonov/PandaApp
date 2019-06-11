@@ -27,7 +27,7 @@ namespace Panda.Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false),
-                    Weight = table.Column<double>(nullable: false),
+                    Weight = table.Column<decimal>(nullable: false),
                     ShippingAddress = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
                     EstimatedDeliveryDate = table.Column<DateTime>(nullable: false),

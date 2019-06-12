@@ -1,4 +1,5 @@
-﻿using Panda.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Panda.Data;
 using Panda.Models;
 using Panda.Models.Enums;
 using System.Collections.Generic;
@@ -45,7 +46,10 @@ namespace Panda.Services
 
         public ICollection<Package> GetAllPendingPackages()
         {
-            return context.Packages.Where(x => x.Status == Status.Pending).ToList();
+            return context.Packages
+                .Where(x => x.Status == Status.Pending)
+                .Include(x => x.Recipient)
+                .ToList();
         }
 
         public ICollection<User> GetAllRecipients()

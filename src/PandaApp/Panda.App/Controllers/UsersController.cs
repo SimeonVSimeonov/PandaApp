@@ -4,6 +4,7 @@ using Panda.Services;
 using SIS.MvcFramework;
 using SIS.MvcFramework.Attributes;
 using SIS.MvcFramework.Attributes.Action;
+using SIS.MvcFramework.Attributes.Security;
 using SIS.MvcFramework.Result;
 using System.Security.Cryptography;
 using System.Text;
@@ -64,11 +65,13 @@ namespace Panda.App.Controllers
                 Email = model.Email
             };
 
-            this.userService.CreateUser(user);
+            var createdUser =  this.userService.CreateUser(user);
+            this.SignIn(createdUser.Id, model.Username, model.Password);
 
-            return this.Redirect("/Users/Login");
+            return this.Redirect("/");
         }
 
+        [Authorize]
         public IActionResult Logout()
         {
             this.SignOut();

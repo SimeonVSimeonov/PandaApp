@@ -1,23 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Panda.App.ViewModels.Packages;
+﻿using Panda.App.ViewModels.Packages;
+using Panda.Data;
 using Panda.Models;
+using Panda.Models.Enums;
 using Panda.Services;
 using SIS.MvcFramework;
 using SIS.MvcFramework.Attributes;
 using SIS.MvcFramework.Attributes.Security;
-using SIS.MvcFramework.Mapping;
 using SIS.MvcFramework.Result;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Panda.App.Controllers
 {
     public class PackagesController : Controller
     {
         private readonly IPackageService packageService;
+        private readonly PandaAppDBContext context;
 
-        public PackagesController(IPackageService packageService)
+        public PackagesController(IPackageService packageService, PandaAppDBContext context)
         {
             this.packageService = packageService;
+            this.context = context;
         }
 
         [Authorize]
@@ -55,7 +58,17 @@ namespace Panda.App.Controllers
 
             if (allDeliveredPackages.Count != 0)
             {
-                return this.View(allDeliveredPackages.Select(ModelMapper.ProjectTo<AllDeliveredPackagesModelView>).ToList());
+                var deliveredView = this.context.Packages.Select(x =>
+                new AllDeliveredPackagesModelView
+                {
+                    Description = x.Description,
+                    ShippingAddress = x.ShippingAddress,
+                    Status = Status.Delivered.ToString(),
+                    RecipientName = x.Recipient.Username,
+                    Weight = x.Weight
+                }).ToList();
+
+                return this.View(deliveredView);
             }
 
             return this.View(new List<AllDeliveredPackagesModelView>());
@@ -64,13 +77,16 @@ namespace Panda.App.Controllers
         [Authorize]
         public IActionResult Pending()
         {
-            ICollection<Package> allPendingPackages = this.packageService.GetAllPendingPackages();
-            if (allPendingPackages.Count != 0)
-            {
-                return this.View(allPendingPackages.Select(ModelMapper.ProjectTo<AllPendingPackagesViewModel>).ToList());
-            }
-
-            return this.View(new List<AllPendingPackagesViewModel>());
+            var packages = this.packageService.GetAllPendingPackages()
+                .Select(x => new AllPendingPackagesViewModel
+                {
+                    Description = x.Description,
+                    Id = x.Id,
+                    Weight = x.Weight,
+                    ShippingAddress = x.ShippingAddress,
+                    RecipientName = x.Recipient.Username,
+                }).ToList();
+            return this.View(packages);
         }
 
         [Authorize]

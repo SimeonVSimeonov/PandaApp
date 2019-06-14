@@ -1,4 +1,5 @@
 # PandaApp
+<<<<<<< HEAD
 PANDA (Package Acceptance and National Delivery Application) web application from my SoftUni Web Basic Course
 
 1. 1.Technological Requirements
@@ -124,3 +125,6 @@ Make sure you provide the best architecture possible. Structure your code into d
 - In case of invalid data during the **login** , redirect to &quot; **Users/Login**&quot;
 - In case of invalid data during the **registration** , redirect to &quot; **Users/Register**&quot;
 - In case of invalid data during the **package creation** , redirect to &quot; **Package/Create**&quot;
+=======
+PANDA (Package Acceptance and National Delivery Application) web application from my @SoftUni Web Basic Course
+>>>>>>> 1359474f1377240a9ae9dfdad00ea6e288c373c7
